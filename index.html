@@ -666,8 +666,7 @@ section{
       if(progress >= 100){
         progress = 100;
         clearInterval(interval);
-        verifyLabel.textContent = 'Friendship Confirmed 💗';
-        setTimeout(revealBlackScreen, 500);
+        revealBlackScreen();
       }
       verifyBarFill.style.width = progress+'%';
     }, 90);
@@ -677,14 +676,11 @@ section{
   const flashwhite = document.getElementById('flashwhite');
   const confettiCanvas = document.getElementById('confetti-canvas');
 
-  function revealBlackScreen(){
-    securityEl.classList.remove('show');
-    setTimeout(()=>{
-      securityEl.classList.remove('visible');
-      securityEl.style.display = 'none';
-      blackscreen.style.display = 'block';
-      setTimeout(flashAndReveal, 3000);
-    }, 700);
+  function revealBlackScreen() {
+    ambientLayer.style.display = "none";
+    securityEl.style.display = "none";
+    blackscreen.style.display = "block";
+    setTimeout(flashAndReveal, 3000);
   }
 
   function flashAndReveal(){
@@ -699,6 +695,7 @@ section{
     setTimeout(()=>{
       flashwhite.style.display = 'none';
       document.getElementById('main-content').style.display = 'block';
+      ambientLayer.style.display = "block";
       document.getElementById('hero-name').textContent = verifiedName;
       burstConfetti();
     }, 250);
